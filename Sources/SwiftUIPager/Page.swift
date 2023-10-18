@@ -34,7 +34,7 @@ public class Page: ObservableObject {
     }
 
     /// Total number of pages
-    var totalPages: Int = Int.max {
+    var totalPages: Int = 0 {
         didSet {
             // reset in case there's a deletion
             self.index = totalPages > 0 ? index : 0
