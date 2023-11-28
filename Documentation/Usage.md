@@ -93,6 +93,13 @@ Pager(...)
     .dragForwardOnly()
 ```
 
+It is possible to force `Pager` to scroll backwards only. This can be done by using `dragBackwardOnly` modifier:
+
+```swift
+Pager(...)
+    .dragBackwardOnly()
+```
+
 ### Alignment
 
 Pass a position to `itemAspectRatio` or `preferredItemSize` to specify the alignment along the vertical / horizontal axis for a horizontal / vertical `Pager`. Change its position along the horizontal / vertical  axis of a horizontal / vertical `Pager` by using `alignment`: 

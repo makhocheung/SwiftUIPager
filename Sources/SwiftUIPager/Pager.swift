@@ -98,6 +98,9 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
 
     /// Swiping back is disabled
     var dragForwardOnly: Bool = false
+    
+    /// Swiping forward is disabled
+    var dragBackwardOnly: Bool = false
 
     /// `true` if the pager is horizontal
     var isHorizontal: Bool = true
@@ -229,6 +232,7 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
             .bounces(bounces)
             .draggingAnimation(draggingAnimation)
             .dragForwardOnly(dragForwardOnly)
+            .dragBackwardOnly(dragBackwardOnly)
         #else
         pagerContent = pagerContent.draggingAnimation(draggingAnimation)
         #endif

@@ -79,6 +79,9 @@ extension Pager {
 
         /// Swiping back is disabled
         var dragForwardOnly: Bool = false
+        
+        /// Swiping forward is disabled
+        var dragBackwardOnly: Bool = false
 
         /// `true` if the pager is horizontal
         var isHorizontal: Bool = true
@@ -298,11 +301,13 @@ extension Pager.PagerContent {
             guard !dragForwardOnly else { return }
             withAnimation(animation) { self.pagerModel.update(.previous) }
         case (.right, true):
+            guard !dragBackwardOnly else { return }
             withAnimation(animation) { self.pagerModel.update(.next) }
         case (.up, false):
             guard !dragForwardOnly else { return }
             withAnimation(animation) { self.pagerModel.update(.previous) }
         case (.down, false):
+            guard !dragBackwardOnly else { return }
             withAnimation(animation) { self.pagerModel.update(.next) }
         case (.down, true), (.up, true), (.left, false), (.right, false):
             break
@@ -320,7 +325,15 @@ extension Pager.PagerContent {
                 state = false
             }
             .onChanged({ value in
-                if !dragForwardOnly || dragTranslation(for: value).width < 0 {
+                if dragForwardOnly || dragBackwardOnly {
+                    if dragForwardOnly && dragBackwardOnly {
+                        return
+                    }
+                    if (dragForwardOnly && dragTranslation(for: value).width < 0)
+                     || (dragBackwardOnly && dragTranslation(for: value).width > 0) {
+                        self.onDragChanged(with: value)
+                    }
+                } else {
                     self.onDragChanged(with: value)
                 }
             })

@@ -79,6 +79,14 @@ extension Pager.PagerContent: Buildable {
     func dragForwardOnly(_ value: Bool = true) -> Self {
         mutating(keyPath: \.dragForwardOnly, value: value)
     }
+    
+    /// User can only swipe backward so in one direction
+    ///
+    /// - Parameter enabled: by default dragBackwardOnly is disables so pages can be scrolled in both directions,
+    ///     set to true to disable scrolling forwards
+    func dragBackwardOnly(_ value: Bool = true) -> Self {
+        mutating(keyPath: \.dragBackwardOnly, value: value)
+    }
 
     /// Sets the explicit animation to be used. Defaults to `.standard`
     ///
